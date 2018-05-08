@@ -11,20 +11,23 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserDAOJPAImpl implements UserDAO {
+public class UserDAOJPAImpl implements UserDAO
+{
     private static final Logger LOGGER = Logger.getLogger(UserDAOJPAImpl.class.getName());
 
 //    private HashMap<String, User> users;
 
     private final EntityManagerFactory factory;
 
-    public UserDAOJPAImpl() {
+    public UserDAOJPAImpl()
+    {
 //        users = new HashMap<String, User>();
         factory = Persistence.createEntityManagerFactory("auction");
     }
 
     @Override
-    public int count() {
+    public int count()
+    {
         int result = 0;
 
         EntityManager entityManager = factory.createEntityManager();
@@ -34,13 +37,11 @@ public class UserDAOJPAImpl implements UserDAO {
         {
             result = count(entityManager);
             entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             entityManager.getTransaction().rollback();
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
-        }
-        finally
+        } finally
         {
             entityManager.close();
         }
@@ -55,7 +56,8 @@ public class UserDAOJPAImpl implements UserDAO {
     }
 
     @Override
-    public void create(User user) {
+    public void create(User user)
+    {
         EntityManager entityManager = factory.createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -63,13 +65,11 @@ public class UserDAOJPAImpl implements UserDAO {
         {
             create(entityManager, user);
             entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             entityManager.getTransaction().rollback();
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
-        }
-        finally
+        } finally
         {
             entityManager.close();
         }
@@ -95,13 +95,11 @@ public class UserDAOJPAImpl implements UserDAO {
         {
             edit(entityManager, user);
             entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             entityManager.getTransaction().rollback();
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
-        }
-        finally
+        } finally
         {
             entityManager.close();
         }
@@ -128,13 +126,11 @@ public class UserDAOJPAImpl implements UserDAO {
         {
             result = findAll(entityManager);
             entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             entityManager.getTransaction().rollback();
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database");
-        }
-        finally
+        } finally
         {
             entityManager.getTransaction().commit();
         }
@@ -159,13 +155,11 @@ public class UserDAOJPAImpl implements UserDAO {
         {
             result = findByEmail(entityManager, email);
             entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             entityManager.getTransaction().rollback();
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
-        }
-        finally
+        } finally
         {
             entityManager.close();
         }
@@ -190,13 +184,11 @@ public class UserDAOJPAImpl implements UserDAO {
         {
             remove(entityManager, user);
             entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             entityManager.getTransaction().rollback();
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
-        }
-        finally
+        } finally
         {
             entityManager.close();
         }
