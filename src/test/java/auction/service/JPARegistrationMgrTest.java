@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 
 public class JPARegistrationMgrTest
 {
-
     private RegistrationMgr registrationMgr;
 
     @Before
@@ -43,7 +42,7 @@ public class JPARegistrationMgrTest
     @Test
     public void getUsers() {
         List<User> users = registrationMgr.getUsers();
-        assertEquals(0, users.size());
+        assertEquals(3, users.size());
 
         User user1 = registrationMgr.registerUser("xxx8@yyy");
         users = registrationMgr.getUsers();

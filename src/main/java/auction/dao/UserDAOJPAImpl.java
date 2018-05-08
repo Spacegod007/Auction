@@ -132,7 +132,7 @@ public class UserDAOJPAImpl implements UserDAO
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database");
         } finally
         {
-            entityManager.getTransaction().commit();
+            entityManager.close();
         }
         return result;
 //        return new ArrayList<User>(users.values());
