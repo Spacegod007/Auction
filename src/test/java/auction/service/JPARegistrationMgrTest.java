@@ -22,7 +22,7 @@ public class JPARegistrationMgrTest
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("auction");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.createQuery("delete from AuctionUser").executeUpdate();
+        entityManager.createQuery("delete from User").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
     }
