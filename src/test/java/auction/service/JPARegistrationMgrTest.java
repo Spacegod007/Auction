@@ -1,9 +1,13 @@
 package auction.service;
 
 import auction.domain.User;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -11,6 +15,17 @@ import static org.junit.Assert.*;
 public class JPARegistrationMgrTest
 {
     private RegistrationMgr registrationMgr;
+
+    @After
+    public void tearDown()
+    {
+        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("auction");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("delete from AuctionUser").executeUpdate();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -42,7 +57,7 @@ public class JPARegistrationMgrTest
     @Test
     public void getUsers() {
         List<User> users = registrationMgr.getUsers();
-        assertEquals(3, users.size());
+        assertEquals(0, users.size());
 
         User user1 = registrationMgr.registerUser("xxx8@yyy");
         users = registrationMgr.getUsers();
