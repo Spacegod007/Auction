@@ -67,19 +67,17 @@ public class Item implements Comparable<Item> {
 
         Item item = (Item) o;
 
-        return id.equals(item.id) &&
-                /*seller.equals(item.seller) && category.equals(item.category) && (highest != null ? highest.equals(item.highest) : item.highest == null) && */
-                description.equals(item.description);
+        return id.equals(item.id) && seller.equals(item.seller) && category.equals(item.category) && (highest != null ? highest.equals(item.highest) : item.highest == null) && description.equals(item.description);
     }
 
     @Override
     public int hashCode()
     {
-//        int result = id.hashCode();
-//        result = 31 * result + seller.hashCode();
-//        result = 31 * result + category.hashCode();
-//        result = 31 * result + (highest != null ? highest.hashCode() : 0);
-        int result = description.hashCode();
+        int result = id.hashCode();
+        result = 31 * result + seller.hashCode();
+        result = 31 * result + category.hashCode();
+        result = 31 * result + (highest != null ? highest.hashCode() : 0);
+        result = 31 * result + description.hashCode();
         return result;
     }
 
