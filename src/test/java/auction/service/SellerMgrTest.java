@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import nl.fontys.util.Money;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +13,10 @@ import org.junit.Test;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class SellerMgrTest {
 
@@ -24,6 +29,18 @@ public class SellerMgrTest {
         registrationMgr = new RegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
+    }
+
+    @After
+    public void tearDown()
+    {
+        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("auction");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM User").executeUpdate();
+        entityManager.createQuery("DELETE FROM Item").executeUpdate();
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     /**

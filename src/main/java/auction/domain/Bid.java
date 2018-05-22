@@ -3,14 +3,19 @@ package auction.domain;
 import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
-public class Bid {
+import java.io.Serializable;
+
+public class Bid implements Serializable
+{
 
     private FontysTime time;
     private User buyer;
     private Money amount;
 
     public Bid(User buyer, Money amount) {
-        //TODO
+        this.buyer = buyer;
+        this.amount = amount;
+                //this.programmer = IDIOT FOR FORGETTING THIS
     }
 
     public FontysTime getTime() {

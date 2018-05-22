@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import nl.fontys.util.Money;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,12 @@ import auction.domain.Bid;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AuctionMgrTest {
 
@@ -24,6 +30,18 @@ public class AuctionMgrTest {
         registrationMgr = new RegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
+    }
+
+    @After
+    public void tearDown()
+    {
+        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("auction");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM User").executeUpdate();
+        entityManager.createQuery("DELETE FROM Item").executeUpdate();
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Test
@@ -53,10 +71,10 @@ public class AuctionMgrTest {
         Item item1 = sellerMgr.offerItem(seller3, cat, omsch);
         Item item2 = sellerMgr.offerItem(seller4, cat, omsch);
 
-        ArrayList<Item> res = (ArrayList<Item>) auctionMgr.findItemByDescription(omsch2);
+        List<Item> res = auctionMgr.findItemByDescription(omsch2);
         assertEquals(0, res.size());
 
-        res = (ArrayList<Item>) auctionMgr.findItemByDescription(omsch);
+        res = auctionMgr.findItemByDescription(omsch);
         assertEquals(2, res.size());
 
     }

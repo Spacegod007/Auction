@@ -4,6 +4,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
         <class>auction.domain.User</class>
+        <class>auction.domain.Item</class>
         <shared-cache-mode>NONE</shared-cache-mode>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://den1.mssql5.gear.host"/>
