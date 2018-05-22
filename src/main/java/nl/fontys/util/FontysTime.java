@@ -1,9 +1,13 @@
 package nl.fontys.util;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.sql.Time;
 import java.util.TimeZone;
 
+@Embeddable
 public class FontysTime {
+	@Column(name = "seconds")
 	private long seconds;
 
 	public FontysTime() {

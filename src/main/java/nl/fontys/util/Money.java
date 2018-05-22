@@ -1,9 +1,12 @@
 package nl.fontys.util;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.*;
 import java.text.*;
 
-public class Money implements Serializable, Comparable {
+@Embeddable
+public class Money implements Comparable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -93,8 +96,10 @@ public class Money implements Serializable, Comparable {
 		return new Money (-m.cents,m.currency);
 	}
 
+	@Column(name = "money.currency")
 	private String currency;
 
+	@Column(name = "money.cents")
 	private long cents;
 
 	public int compareTo(Object o) {
