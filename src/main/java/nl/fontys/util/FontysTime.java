@@ -2,12 +2,11 @@ package nl.fontys.util;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.TimeZone;
 
-@Embeddable
-public class FontysTime {
-	@Column(name = "seconds")
+public class FontysTime implements Serializable{
 	private long seconds;
 
 	public FontysTime() {

@@ -19,6 +19,7 @@ public class Item implements Comparable<Item> {
     @ManyToOne
     private User seller;
     @Embedded
+    @AttributeOverrides(@AttributeOverride(name="description", column = @Column(name = "columnDescription")))
     private Category category;
     @Embedded
     private Bid highest;

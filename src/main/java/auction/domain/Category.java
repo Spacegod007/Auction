@@ -6,7 +6,6 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Category {
 
-    @Column(name = "category.description")
     private String description;
 
     public Category() {

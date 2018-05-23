@@ -13,11 +13,10 @@ public class Bid
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 
-    @Embedded
     private FontysTime time;
     @ManyToOne
     private User buyer;
-    @Embedded
+
     private Money amount;
 
     public Bid() {

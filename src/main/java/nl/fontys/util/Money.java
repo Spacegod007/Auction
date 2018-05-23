@@ -5,8 +5,8 @@ import javax.persistence.Embeddable;
 import java.io.*;
 import java.text.*;
 
-@Embeddable
-public class Money implements Comparable {
+
+public class Money implements Serializable, Comparable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -96,10 +96,8 @@ public class Money implements Comparable {
 		return new Money (-m.cents,m.currency);
 	}
 
-	@Column(name = "money.currency")
 	private String currency;
 
-	@Column(name = "money.cents")
 	private long cents;
 
 	public int compareTo(Object o) {
