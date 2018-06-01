@@ -1,6 +1,9 @@
 package auction.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 @Entity
 @Table(name = "AuctionUser")
@@ -14,7 +17,8 @@ public class User {
     @Id
     private String email;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String email) {
         this.email = email;
@@ -24,9 +28,24 @@ public class User {
         return email;
     }
 
+
+    @OneToMany(mappedBy = "seller")
+    public Set<Item> offeredItems = new HashSet<>();
+
+    public Iterator getOfferedItems() {
+        return offeredItems.iterator();
+    }
+
+    public void addItem(Item item) {
+        offeredItems.add(item);
+    }
+
+    public int numberOfOfferedItem() {
+        return offeredItems.size();
+    }
+
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -36,8 +55,7 @@ public class User {
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return email.hashCode();
     }
 }

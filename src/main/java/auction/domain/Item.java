@@ -13,14 +13,18 @@ import javax.persistence.*;
 @Entity
 public class Item implements Comparable<Item> {
 //https://en.wikibooks.org/wiki/Java_Persistence/Embeddables
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.DETACH)
     private User seller;
+
     @Embedded
     @AttributeOverrides(@AttributeOverride(name="description", column = @Column(name = "columnDescription")))
     private Category category;
+
     @Embedded
     private Bid highest;
 
