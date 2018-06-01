@@ -27,7 +27,6 @@ public class AuctionMgr  {
         return itemDAO.find(id);
     }
 
-  
    /**
      * @param description
      * @return een lijst met items met @desciption. Eventueel lege lijst.

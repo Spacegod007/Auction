@@ -12,6 +12,7 @@ import auction.domain.Bid;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
+import util.DatabaseCleaner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuctionMgrTest {
+
+    private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(DatabaseCleaner.PERSISTENCE_NAME_AUCTION);
 
     private AuctionMgr auctionMgr;
     private RegistrationMgr registrationMgr;
@@ -33,16 +36,21 @@ public class AuctionMgrTest {
     }
 
     @After
-    public void tearDown()
-    {
-        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("auction");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.createQuery("DELETE FROM User").executeUpdate();
-        entityManager.createQuery("DELETE FROM Item").executeUpdate();
-        entityManager.getTransaction().commit();
-        entityManager.close();
+    public void after() throws Exception {
+        new DatabaseCleaner(entityManagerFactory.createEntityManager()).clean();
     }
+
+//    @After
+//    public void tearDown()
+//    {
+//        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("auction");
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        entityManager.getTransaction().begin();
+//        entityManager.createQuery("DELETE FROM User").executeUpdate();
+//        entityManager.createQuery("DELETE FROM Item").executeUpdate();
+//        entityManager.getTransaction().commit();
+//        entityManager.close();
+//    }
 
     @Test
     public void getItem() {
