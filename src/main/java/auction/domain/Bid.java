@@ -6,12 +6,16 @@ import nl.fontys.util.Money;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Embeddable
+@Entity
 public class Bid
 {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private Item item;
 
     private FontysTime time;
     @ManyToOne
@@ -22,10 +26,15 @@ public class Bid
     public Bid() {
     }
 
-    public Bid(User buyer, Money amount) {
+    public Bid(User buyer, Money amount, Item item) {
+        this.item = item;
         this.buyer = buyer;
         this.amount = amount;
         time = FontysTime.now();
+    }
+
+    public Item getItem() {
+        return item;
     }
 
     public FontysTime getTime() {

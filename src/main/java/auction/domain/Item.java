@@ -25,7 +25,7 @@ public class Item implements Comparable<Item> {
     @AttributeOverrides(@AttributeOverride(name="description", column = @Column(name = "columnDescription")))
     private Category category;
 
-    @Embedded
+    @OneToOne(mappedBy = "item", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.MERGE})
     private Bid highest;
 
     private String description;
@@ -62,7 +62,7 @@ public class Item implements Comparable<Item> {
         if (highest != null && highest.getAmount().compareTo(amount) >= 0) {
             return null;
         }
-        highest = new Bid(buyer, amount);
+        highest = new Bid(buyer, amount, this);
         return highest;
     }
 

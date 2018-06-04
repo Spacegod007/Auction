@@ -1,5 +1,6 @@
 package util;
 
+import auction.domain.Bid;
 import auction.domain.Item;
 import auction.domain.User;
 
@@ -12,6 +13,7 @@ public class DatabaseCleaner {
     public static final String PERSISTENCE_NAME_AUCTION = "auction";
 
     private static final Class<?>[] ENTITY_TYPES = {
+            Bid.class,
             Item.class,
             User.class
     };

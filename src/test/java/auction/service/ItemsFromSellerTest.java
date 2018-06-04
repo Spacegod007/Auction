@@ -1,5 +1,7 @@
 package auction.service;
 
+import auction.domain.Bid;
+import nl.fontys.util.Money;
 import org.junit.After;
 
 import javax.persistence.*;
@@ -15,12 +17,14 @@ import static org.junit.Assert.*;
 public class ItemsFromSellerTest {
 
     final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("auction");
+    private AuctionMgr auctionMgr;
     private RegistrationMgr registrationMgr;
     private SellerMgr sellerMgr;
 
     @Before
     public void setUp() throws Exception {
         registrationMgr = new RegistrationMgr();
+        auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
     }
 
@@ -121,5 +125,31 @@ public class ItemsFromSellerTest {
         it30.next();
         assertTrue(it30.hasNext());
 
+    }
+
+    @Test
+    public void bidItem()
+    {
+        String email = "ss2@nl";
+        String emailb = "bb@nl";
+        String emailb2 = "bb2@nl";
+        String omsch = "omsch_b";
+
+        User seller = registrationMgr.registerUser(email);
+        User buyer = registrationMgr.registerUser(emailb);
+        User buyer2 = registrationMgr.registerUser(emailb2);
+        // eerste bod
+        Category cat = new Category("cat9");
+        Item item1 = sellerMgr.offerItem(seller, cat, omsch);
+        Bid new1 = auctionMgr.newBid(item1, buyer, new Money(10, "eur"));
+        assertEquals(emailb, new1.getBuyer().getEmail());
+
+        // lager bod
+        Bid new2 = auctionMgr.newBid(item1, buyer2, new Money(9, "eur"));
+        assertNull(new2);
+
+        // hoger bod
+        Bid new3 = auctionMgr.newBid(item1, buyer2, new Money(11, "eur"));
+        assertEquals(emailb2, new3.getBuyer().getEmail());
     }
 }
