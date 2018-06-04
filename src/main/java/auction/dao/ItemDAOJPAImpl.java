@@ -13,6 +13,8 @@ public class ItemDAOJPAImpl implements ItemDAO
     private static final Logger LOGGER = Logger.getLogger(ItemDAOJPAImpl.class.getName());
 
     private static final String ERROR_MESSAGE = "Something went wrong while interacting with the database";
+    private static final String NO_RESULT_ERROR_MESSAGE = "No result was found in the database";
+
     private final EntityManagerFactory entityManagerFactory;
 
     public ItemDAOJPAImpl()
@@ -45,7 +47,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         return returnable;
     }
 
-    private int count(EntityManager entityManager)
+    private int count(EntityManager entityManager) throws Exception
     {
         Query query = entityManager.createNamedQuery("Item.count", Item.class);
         return (Integer) query.getSingleResult();
@@ -73,7 +75,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         }
     }
 
-    private void create(EntityManager entityManager, Item item)
+    private void create(EntityManager entityManager, Item item) throws Exception
     {
         entityManager.persist(item);
     }
@@ -100,7 +102,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         }
     }
 
-    private void edit(EntityManager entityManager, Item item)
+    private void edit(EntityManager entityManager, Item item) throws Exception
     {
         entityManager.merge(item);
     }
@@ -118,7 +120,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         }
         catch (NoResultException e)
         {
-            LOGGER.log(Level.INFO, "No result was found in the database", e);
+            LOGGER.log(Level.INFO, NO_RESULT_ERROR_MESSAGE);
         }
         catch (Exception e)
         {
@@ -133,7 +135,7 @@ public class ItemDAOJPAImpl implements ItemDAO
 
     }
 
-    private Item find(EntityManager entityManager, Long id)
+    private Item find(EntityManager entityManager, Long id) throws Exception
     {
         return entityManager.createNamedQuery("Item.find", Item.class)
                 .setParameter("id", id)
@@ -154,7 +156,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         }
         catch (NoResultException e)
         {
-            LOGGER.log(Level.INFO, "No result was found in the database", e);
+            LOGGER.log(Level.INFO, NO_RESULT_ERROR_MESSAGE);
         }
         catch (Exception e)
         {
@@ -168,7 +170,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         return returnable;
     }
 
-    private List<Item> findAll(EntityManager entityManager)
+    private List<Item> findAll(EntityManager entityManager) throws Exception
     {
         return entityManager.createNamedQuery("Item.findAll", Item.class).getResultList();
     }
@@ -187,7 +189,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         }
         catch (NoResultException e)
         {
-            LOGGER.log(Level.INFO, "No result was found in the database", e);
+            LOGGER.log(Level.INFO, NO_RESULT_ERROR_MESSAGE);
         }
         catch (Exception e)
         {
@@ -201,7 +203,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         return returnable;
     }
 
-    private List<Item> findByDescription(EntityManager entityManager, String description)
+    private List<Item> findByDescription(EntityManager entityManager, String description) throws Exception
     {
         return entityManager.createNamedQuery("Item.findByDescription", Item.class)
                 .setParameter("description", description)
@@ -229,7 +231,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         }
     }
 
-    private void remove(EntityManager entityManager, Item item)
+    private void remove(EntityManager entityManager, Item item) throws Exception
     {
         entityManager.remove(entityManager.merge(item));
     }

@@ -12,6 +12,9 @@ public class UserDAOJPAImpl implements UserDAO
 {
     private static final Logger LOGGER = Logger.getLogger(UserDAOJPAImpl.class.getName());
 
+    private static final String ERROR_MESSAGE = "Something went wrong while interacting with the database";
+    private static final String NO_RESULT_ERROR_MESSAGE = "No result was found in the database";
+
 //    private HashMap<String, User> users;
 
     private final EntityManagerFactory factory;
@@ -36,7 +39,7 @@ public class UserDAOJPAImpl implements UserDAO
             entityManager.getTransaction().commit();
         } catch (Exception e)
         {
-            LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
+            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
         } finally
         {
             entityManager.close();
@@ -45,7 +48,7 @@ public class UserDAOJPAImpl implements UserDAO
         return result;
     }
 
-    private int count(EntityManager entityManager)
+    private int count(EntityManager entityManager) throws Exception
     {
         Query query = entityManager.createNamedQuery("User.count", User.class);
         return (Integer) query.getSingleResult();
@@ -64,7 +67,7 @@ public class UserDAOJPAImpl implements UserDAO
         } catch (Exception e)
         {
 
-            LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
+            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
         } finally
         {
             entityManager.close();
@@ -76,7 +79,7 @@ public class UserDAOJPAImpl implements UserDAO
 //        users.put(user.getEmail(), user);
     }
 
-    private void create(EntityManager entityManager, User user)
+    private void create(EntityManager entityManager, User user) throws Exception
     {
         entityManager.persist(user);
     }
@@ -94,7 +97,7 @@ public class UserDAOJPAImpl implements UserDAO
         } catch (Exception e)
         {
 
-            LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
+            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
         } finally
         {
             entityManager.close();
@@ -105,7 +108,7 @@ public class UserDAOJPAImpl implements UserDAO
 //        users.put(user.getEmail(), user);
     }
 
-    private void edit(EntityManager entityManager, User user)
+    private void edit(EntityManager entityManager, User user) throws Exception
     {
         entityManager.merge(user);
     }
@@ -124,11 +127,11 @@ public class UserDAOJPAImpl implements UserDAO
             entityManager.getTransaction().commit();
         } catch (NoResultException e)
         {
-            LOGGER.log(Level.INFO, "No result was found in the database", e);
+            LOGGER.log(Level.INFO, NO_RESULT_ERROR_MESSAGE);
         } catch (Exception e)
         {
 
-            LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database");
+            LOGGER.log(Level.SEVERE, ERROR_MESSAGE);
         } finally
         {
             entityManager.close();
@@ -137,7 +140,7 @@ public class UserDAOJPAImpl implements UserDAO
 //        return new ArrayList<User>(users.values());
     }
 
-    private List<User> findAll(EntityManager entityManager)
+    private List<User> findAll(EntityManager entityManager)  throws Exception
     {
         return entityManager.createNamedQuery("User.getAll", User.class)
                 .getResultList();
@@ -156,11 +159,11 @@ public class UserDAOJPAImpl implements UserDAO
             entityManager.getTransaction().commit();
         } catch (NoResultException e)
         {
-            LOGGER.log(Level.INFO, "No result was found in the database", e);
+            LOGGER.log(Level.INFO, NO_RESULT_ERROR_MESSAGE);
         } catch (Exception e)
         {
 
-            LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
+            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
         } finally
         {
             entityManager.close();
@@ -169,7 +172,7 @@ public class UserDAOJPAImpl implements UserDAO
 //        return users.get(email);
     }
 
-    private User findByEmail(EntityManager entityManager, String email)
+    private User findByEmail(EntityManager entityManager, String email) throws Exception
     {
         return entityManager.createNamedQuery("User.findByEmail", User.class)
                 .setParameter("email", email)
@@ -189,7 +192,7 @@ public class UserDAOJPAImpl implements UserDAO
         } catch (Exception e)
         {
 
-            LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
+            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
         } finally
         {
             entityManager.close();
@@ -197,7 +200,7 @@ public class UserDAOJPAImpl implements UserDAO
 //        users.remove(user.getEmail());
     }
 
-    private void remove(EntityManager entityManager, User user)
+    private void remove(EntityManager entityManager, User user)  throws Exception
     {
         entityManager.remove(entityManager.merge(user));
     }
