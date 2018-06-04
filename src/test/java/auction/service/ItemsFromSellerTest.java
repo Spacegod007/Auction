@@ -5,6 +5,8 @@ import nl.fontys.util.Money;
 import org.junit.After;
 
 import javax.persistence.*;
+
+import org.junit.Assert;
 import util.DatabaseCleaner;
 import auction.domain.Category;
 import auction.domain.Item;
@@ -128,28 +130,20 @@ public class ItemsFromSellerTest {
     }
 
     @Test
-    public void bidItem()
+    public void itemBid()
     {
-        String email = "ss2@nl";
-        String emailb = "bb@nl";
-        String emailb2 = "bb2@nl";
-        String omsch = "omsch_b";
+        String email = "email1@nl";
+        String email2 = "email2@nl";
+        String description = "description";
+        Category category = new Category("Category");
+        Money money = new Money(10, Money.EURO);
 
-        User seller = registrationMgr.registerUser(email);
-        User buyer = registrationMgr.registerUser(emailb);
-        User buyer2 = registrationMgr.registerUser(emailb2);
-        // eerste bod
-        Category cat = new Category("cat9");
-        Item item1 = sellerMgr.offerItem(seller, cat, omsch);
-        Bid new1 = auctionMgr.newBid(item1, buyer, new Money(10, "eur"));
-        assertEquals(emailb, new1.getBuyer().getEmail());
+        User user1 = registrationMgr.registerUser(email);
+        User user2 = registrationMgr.registerUser(email2);
+        Item item = sellerMgr.offerItem(user1, category, description);
+        Bid bid = auctionMgr.newBid(item, user2, money);
 
-        // lager bod
-        Bid new2 = auctionMgr.newBid(item1, buyer2, new Money(9, "eur"));
-        assertNull(new2);
-
-        // hoger bod
-        Bid new3 = auctionMgr.newBid(item1, buyer2, new Money(11, "eur"));
-        assertEquals(emailb2, new3.getBuyer().getEmail());
+        Assert.assertEquals("Bid was placed on a different item than the given item", item, bid.getItem());
+        Assert.assertEquals("Bid was placed on an item but a different bid was associated with the item", bid, item.getHighestBid());
     }
 }

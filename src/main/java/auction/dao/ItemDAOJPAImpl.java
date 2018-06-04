@@ -2,10 +2,7 @@ package auction.dao;
 
 import auction.domain.Item;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +35,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         catch (Exception e)
         {
             LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-            entityManager.getTransaction().rollback();
+
         }
         finally
         {
@@ -68,7 +65,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         catch (Exception e)
         {
             LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-            entityManager.getTransaction().rollback();
+
         }
         finally
         {
@@ -95,7 +92,7 @@ public class ItemDAOJPAImpl implements ItemDAO
         catch (Exception e)
         {
             LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-            entityManager.getTransaction().rollback();
+
         }
         finally
         {
@@ -119,10 +116,14 @@ public class ItemDAOJPAImpl implements ItemDAO
            returnItem = find(entityManager, id);
             entityManager.getTransaction().commit();
         }
+        catch (NoResultException e)
+        {
+            LOGGER.log(Level.INFO, "No result was found in the database", e);
+        }
         catch (Exception e)
         {
             LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-            entityManager.getTransaction().rollback();
+
         }
         finally
         {
@@ -151,10 +152,13 @@ public class ItemDAOJPAImpl implements ItemDAO
             returnable = findAll(entityManager);
             entityManager.getTransaction().commit();
         }
+        catch (NoResultException e)
+        {
+            LOGGER.log(Level.INFO, "No result was found in the database", e);
+        }
         catch (Exception e)
         {
             LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-            entityManager.getTransaction().rollback();
         }
         finally
         {
@@ -181,10 +185,13 @@ public class ItemDAOJPAImpl implements ItemDAO
             returnable = findByDescription(entityManager, description);
             entityManager.getTransaction().commit();
         }
+        catch (NoResultException e)
+        {
+            LOGGER.log(Level.INFO, "No result was found in the database", e);
+        }
         catch (Exception e)
         {
             LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-            entityManager.getTransaction().rollback();
         }
         finally
         {
@@ -215,7 +222,6 @@ public class ItemDAOJPAImpl implements ItemDAO
         catch (Exception e)
         {
             LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-            entityManager.getTransaction().rollback();
         }
         finally
         {

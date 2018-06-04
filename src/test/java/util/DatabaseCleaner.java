@@ -3,8 +3,10 @@ package util;
 import auction.domain.Bid;
 import auction.domain.Item;
 import auction.domain.User;
+import org.junit.Test;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.metamodel.EntityType;
 import java.sql.SQLException;
 

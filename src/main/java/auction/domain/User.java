@@ -30,7 +30,7 @@ public class User {
 
 
     @OneToMany(mappedBy = "seller")
-    public Set<Item> offeredItems = new HashSet<>();
+    private Set<Item> offeredItems = new HashSet<>();
 
     public Iterator getOfferedItems() {
         return offeredItems.iterator();

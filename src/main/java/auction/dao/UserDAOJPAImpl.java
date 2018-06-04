@@ -2,10 +2,7 @@ package auction.dao;
 
 import auction.domain.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,7 +36,6 @@ public class UserDAOJPAImpl implements UserDAO
             entityManager.getTransaction().commit();
         } catch (Exception e)
         {
-            entityManager.getTransaction().rollback();
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
         } finally
         {
@@ -67,7 +63,7 @@ public class UserDAOJPAImpl implements UserDAO
             entityManager.getTransaction().commit();
         } catch (Exception e)
         {
-            entityManager.getTransaction().rollback();
+
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
         } finally
         {
@@ -97,7 +93,7 @@ public class UserDAOJPAImpl implements UserDAO
             entityManager.getTransaction().commit();
         } catch (Exception e)
         {
-            entityManager.getTransaction().rollback();
+
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
         } finally
         {
@@ -126,9 +122,12 @@ public class UserDAOJPAImpl implements UserDAO
         {
             result = findAll(entityManager);
             entityManager.getTransaction().commit();
+        } catch (NoResultException e)
+        {
+            LOGGER.log(Level.INFO, "No result was found in the database", e);
         } catch (Exception e)
         {
-            entityManager.getTransaction().rollback();
+
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database");
         } finally
         {
@@ -155,9 +154,12 @@ public class UserDAOJPAImpl implements UserDAO
         {
             result = findByEmail(entityManager, email);
             entityManager.getTransaction().commit();
+        } catch (NoResultException e)
+        {
+            LOGGER.log(Level.INFO, "No result was found in the database", e);
         } catch (Exception e)
         {
-            entityManager.getTransaction().rollback();
+
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
         } finally
         {
@@ -186,7 +188,7 @@ public class UserDAOJPAImpl implements UserDAO
             entityManager.getTransaction().commit();
         } catch (Exception e)
         {
-            entityManager.getTransaction().rollback();
+
             LOGGER.log(Level.SEVERE, "Something went wrong while interacting with the database", e);
         } finally
         {
