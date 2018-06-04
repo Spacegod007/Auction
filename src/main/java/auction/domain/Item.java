@@ -3,6 +3,7 @@ package auction.domain;
 import nl.fontys.util.Money;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @NamedQueries({
         @NamedQuery(name = "Item.count", query = "SELECT COUNT(i) FROM Item AS i"),
@@ -36,6 +37,8 @@ public class Item implements Comparable<Item> {
         this.seller = seller;
         this.category = category;
         this.description = description;
+
+        seller.addItem(this);
     }
 
     public Long getId() {
@@ -80,12 +83,13 @@ public class Item implements Comparable<Item> {
     @Override
     public int hashCode()
     {
-        int result = id.hashCode();
-        result = 31 * result + seller.hashCode();
-        result = 31 * result + category.hashCode();
-        result = 31 * result + (highest != null ? highest.hashCode() : 0);
-        result = 31 * result + description.hashCode();
-        return result;
+        return Objects.hash(id, seller, category, highest, description);
+//        int result = id.hashCode();
+//        result = 31 * result + seller.hashCode();
+//        result = 31 * result + category.hashCode();
+//        result = 31 * result + (highest != null ? highest.hashCode() : 0);
+//        result = 31 * result + description.hashCode();
+//        return result;
     }
 
     @Override

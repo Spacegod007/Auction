@@ -29,8 +29,8 @@ public class SellerMgr {
     public Item offerItem(User seller, Category cat, String description) {
         Item item = new Item(seller, cat, description);
         itemDAO.create(item);
-        seller.addItem(item);
         userDAO.edit(seller);
+
         return item;
     }
     
