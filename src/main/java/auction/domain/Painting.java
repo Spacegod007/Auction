@@ -3,6 +3,7 @@ package auction.domain;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -27,5 +28,24 @@ public class Painting extends Item{
 
     public String getPainter() {
         return painter;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Painting painting = (Painting) o;
+
+        if (!title.equals(painting.title)) return false;
+        return painter.equals(painting.painter);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), title, painter);
     }
 }

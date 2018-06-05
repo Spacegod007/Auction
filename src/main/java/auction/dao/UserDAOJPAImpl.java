@@ -2,27 +2,18 @@ package auction.dao;
 
 import auction.domain.User;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class UserDAOJPAImpl implements UserDAO
+public class UserDAOJPAImpl extends DAOJPAImpl<User> implements UserDAO
 {
-    private static final Logger LOGGER = Logger.getLogger(UserDAOJPAImpl.class.getName());
-
-    private static final String ERROR_MESSAGE = "Something went wrong while interacting with the database";
-    private static final String NO_RESULT_ERROR_MESSAGE = "No result was found in the database";
-
-//    private HashMap<String, User> users;
-
-    private final EntityManagerFactory factory;
-
     public UserDAOJPAImpl()
     {
-//        users = new HashMap<String, User>();
-        factory = Persistence.createEntityManagerFactory("auction");
+        super();
     }
 
     @Override
@@ -30,7 +21,7 @@ public class UserDAOJPAImpl implements UserDAO
     {
         int result = 0;
 
-        EntityManager entityManager = factory.createEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
         try
@@ -54,71 +45,12 @@ public class UserDAOJPAImpl implements UserDAO
         return (Integer) query.getSingleResult();
     }
 
-    @Override
-    public void create(User user)
-    {
-        EntityManager entityManager = factory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        try
-        {
-            create(entityManager, user);
-            entityManager.getTransaction().commit();
-        } catch (Exception e)
-        {
-
-            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-        } finally
-        {
-            entityManager.close();
-        }
-
-//         if (findByEmail(user.getEmail()) != null) {
-//            throw new EntityExistsException();
-//        }
-//        users.put(user.getEmail(), user);
-    }
-
-    private void create(EntityManager entityManager, User user) throws Exception
-    {
-        entityManager.persist(user);
-    }
-
-    @Override
-    public void edit(User user)
-    {
-        EntityManager entityManager = factory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        try
-        {
-            edit(entityManager, user);
-            entityManager.getTransaction().commit();
-        } catch (Exception e)
-        {
-
-            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-        } finally
-        {
-            entityManager.close();
-        }
-//        if (findByEmail(user.getEmail()) == null) {
-//            throw new IllegalArgumentException();
-//        }
-//        users.put(user.getEmail(), user);
-    }
-
-    private void edit(EntityManager entityManager, User user) throws Exception
-    {
-        entityManager.merge(user);
-    }
-
 
     @Override
     public List<User> findAll()
     {
         List<User> result = new ArrayList<>();
-        EntityManager entityManager = factory.createEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
         try
@@ -150,7 +82,7 @@ public class UserDAOJPAImpl implements UserDAO
     public User findByEmail(String email)
     {
         User result = null;
-        EntityManager entityManager = factory.createEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
         try
@@ -177,31 +109,5 @@ public class UserDAOJPAImpl implements UserDAO
         return entityManager.createNamedQuery("User.findByEmail", User.class)
                 .setParameter("email", email)
                 .getSingleResult();
-    }
-
-    @Override
-    public void remove(User user)
-    {
-        EntityManager entityManager = factory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        try
-        {
-            remove(entityManager, user);
-            entityManager.getTransaction().commit();
-        } catch (Exception e)
-        {
-
-            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-        } finally
-        {
-            entityManager.close();
-        }
-//        users.remove(user.getEmail());
-    }
-
-    private void remove(EntityManager entityManager, User user)  throws Exception
-    {
-        entityManager.remove(entityManager.merge(user));
     }
 }

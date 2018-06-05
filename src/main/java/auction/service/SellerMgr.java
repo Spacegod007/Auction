@@ -4,9 +4,7 @@ import auction.dao.ItemDAO;
 import auction.dao.ItemDAOJPAImpl;
 import auction.dao.UserDAO;
 import auction.dao.UserDAOJPAImpl;
-import auction.domain.Category;
-import auction.domain.Item;
-import auction.domain.User;
+import auction.domain.*;
 
 public class SellerMgr {
 
@@ -27,10 +25,13 @@ public class SellerMgr {
      *         en met de beschrijving description
      */
     public Item offerItem(User seller, Category cat, String description) {
-        Item item = new Item(seller, cat, description);
-        itemDAO.create(item);
-        userDAO.edit(seller);
+        return offerItem(new Item(seller, cat, description));
+    }
 
+    private Item offerItem(Item item)
+    {
+        itemDAO.create(item);
+        userDAO.edit(item.getSeller());
         return item;
     }
     
@@ -46,5 +47,16 @@ public class SellerMgr {
             return true;
         }
         return false;
+    }
+
+    public Item offerFurniture(User user, Category category, String description, String material)
+    {
+        return offerItem(new Furniture(user, category, description, material));
+    }
+
+
+    public Item offerPainting(User user, Category category, String description, String title, String painter)
+    {
+        return offerItem(new Painting(user, category, description, title, painter));
     }
 }

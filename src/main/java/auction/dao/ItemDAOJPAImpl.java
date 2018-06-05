@@ -2,26 +2,15 @@ package auction.dao;
 
 import auction.domain.Item;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class ItemDAOJPAImpl implements ItemDAO
+public class ItemDAOJPAImpl extends DAOJPAImpl<Item> implements ItemDAO
 {
-    private static final Logger LOGGER = Logger.getLogger(ItemDAOJPAImpl.class.getName());
-
-    private static final String ERROR_MESSAGE = "Something went wrong while interacting with the database";
-    private static final String NO_RESULT_ERROR_MESSAGE = "No result was found in the database";
-
-    private final EntityManagerFactory entityManagerFactory;
-
-    public ItemDAOJPAImpl()
-    {
-        entityManagerFactory = Persistence.createEntityManagerFactory("auction");
-    }
-
     @Override
     public int count()
     {
@@ -51,60 +40,6 @@ public class ItemDAOJPAImpl implements ItemDAO
     {
         Query query = entityManager.createNamedQuery("Item.count", Item.class);
         return (Integer) query.getSingleResult();
-    }
-
-    @Override
-    public void create(Item item)
-    {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        try
-        {
-            create(entityManager, item);
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
-        {
-            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-
-        }
-        finally
-        {
-            entityManager.close();
-        }
-    }
-
-    private void create(EntityManager entityManager, Item item) throws Exception
-    {
-        entityManager.persist(item);
-    }
-
-    @Override
-    public void edit(Item item)
-    {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        try
-        {
-            edit(entityManager, item);
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
-        {
-            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-
-        }
-        finally
-        {
-            entityManager.close();
-        }
-    }
-
-    private void edit(EntityManager entityManager, Item item) throws Exception
-    {
-        entityManager.merge(item);
     }
 
     @Override
@@ -208,31 +143,5 @@ public class ItemDAOJPAImpl implements ItemDAO
         return entityManager.createNamedQuery("Item.findByDescription", Item.class)
                 .setParameter("description", description)
                 .getResultList();
-    }
-
-    @Override
-    public void remove(Item item)
-    {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        try
-        {
-            remove(entityManager, item);
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
-        {
-            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
-        }
-        finally
-        {
-            entityManager.close();
-        }
-    }
-
-    private void remove(EntityManager entityManager, Item item) throws Exception
-    {
-        entityManager.remove(entityManager.merge(item));
     }
 }
