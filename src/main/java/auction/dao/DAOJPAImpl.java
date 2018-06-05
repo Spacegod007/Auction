@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 abstract class DAOJPAImpl<DBO> implements DAO<DBO>
 {
-    static final Logger LOGGER = Logger.getLogger(ItemDAOJPAImpl.class.getName());
+    static final Logger LOGGER = Logger.getLogger(DAOJPAImpl.class.getName());
 
     static final String ERROR_MESSAGE = "Something went wrong while interacting with the database";
     static final String NO_RESULT_ERROR_MESSAGE = "No result was found in the database";
