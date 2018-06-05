@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import auction.domain.User;
@@ -19,6 +20,7 @@ public class RegistrationMgrTest {
     }
 
     @Test
+    @Ignore
     public void registerUser() {
         User user1 = registrationMgr.registerUser("xxx1@yyy");
         assertTrue(user1.getEmail().equals("xxx1@yyy"));
@@ -31,6 +33,7 @@ public class RegistrationMgrTest {
     }
 
     @Test
+    @Ignore
     public void getUser() {
         User user1 = registrationMgr.registerUser("xxx5@yyy5");
         User userGet = registrationMgr.getUser("xxx5@yyy5");
@@ -41,6 +44,7 @@ public class RegistrationMgrTest {
     }
 
     @Test
+    @Ignore
     public void getUsers() {
         List<User> users = registrationMgr.getUsers();
         assertEquals(0, users.size());

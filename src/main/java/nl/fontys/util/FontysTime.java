@@ -56,4 +56,21 @@ public class FontysTime implements Serializable{
 		TimeZone.setDefault(current);
 		return timeString;
 	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		FontysTime that = (FontysTime) o;
+
+		return seconds == that.seconds;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return (int) (seconds ^ (seconds >>> 32));
+	}
 }

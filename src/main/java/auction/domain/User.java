@@ -3,6 +3,7 @@ package auction.domain;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -45,17 +46,20 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         User user = (User) o;
 
-        return email.equals(user.email);
+        if (!email.equals(user.email)) return false;
+        return offeredItems.size() == user.offeredItems.size();
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return email.hashCode();
     }
 }

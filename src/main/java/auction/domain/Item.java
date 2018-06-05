@@ -83,7 +83,7 @@ public class Item implements Comparable<Item> {
     @Override
     public int hashCode()
     {
-        return Objects.hash(id, seller, category, highest, description);
+        return Objects.hash(seller, category, highest, description);
 //        int result = id.hashCode();
 //        result = 31 * result + seller.hashCode();
 //        result = 31 * result + category.hashCode();
