@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the service package.
+ * generated in the service package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -25,18 +25,24 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _NewBid_QNAME = new QName("http://service/", "newBid");
+    private final static QName _Item_QNAME = new QName("http://service/", "item");
     private final static QName _RevokeItem_QNAME = new QName("http://service/", "revokeItem");
     private final static QName _FindItemByDescriptionResponse_QNAME = new QName("http://service/", "findItemByDescriptionResponse");
     private final static QName _OfferItem_QNAME = new QName("http://service/", "offerItem");
+    private final static QName _FontysTime_QNAME = new QName("http://service/", "fontysTime");
     private final static QName _RevokeItemResponse_QNAME = new QName("http://service/", "revokeItemResponse");
     private final static QName _NewBidResponse_QNAME = new QName("http://service/", "newBidResponse");
     private final static QName _GetItem_QNAME = new QName("http://service/", "getItem");
     private final static QName _OfferFurnitureResponse_QNAME = new QName("http://service/", "offerFurnitureResponse");
     private final static QName _OfferPainting_QNAME = new QName("http://service/", "offerPainting");
     private final static QName _GetItemResponse_QNAME = new QName("http://service/", "getItemResponse");
+    private final static QName _Money_QNAME = new QName("http://service/", "money");
     private final static QName _OfferPaintingResponse_QNAME = new QName("http://service/", "offerPaintingResponse");
     private final static QName _FindItemByDescription_QNAME = new QName("http://service/", "findItemByDescription");
     private final static QName _OfferItemResponse_QNAME = new QName("http://service/", "offerItemResponse");
+    private final static QName _User_QNAME = new QName("http://service/", "user");
+    private final static QName _Bid_QNAME = new QName("http://service/", "bid");
+    private final static QName _Category_QNAME = new QName("http://service/", "category");
     private final static QName _OfferFurniture_QNAME = new QName("http://service/", "offerFurniture");
 
     /**
@@ -52,6 +58,14 @@ public class ObjectFactory {
      */
     public FindItemByDescriptionResponse createFindItemByDescriptionResponse() {
         return new FindItemByDescriptionResponse();
+    }
+
+    /**
+     * Create an instance of {@link Item }
+     * 
+     */
+    public Item createItem() {
+        return new Item();
     }
 
     /**
@@ -95,6 +109,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FontysTime }
+     * 
+     */
+    public FontysTime createFontysTime() {
+        return new FontysTime();
+    }
+
+    /**
      * Create an instance of {@link RevokeItemResponse }
      * 
      */
@@ -135,6 +157,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Money }
+     * 
+     */
+    public Money createMoney() {
+        return new Money();
+    }
+
+    /**
      * Create an instance of {@link OfferPaintingResponse }
      * 
      */
@@ -159,19 +189,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Item }
+     * Create an instance of {@link Bid }
      * 
      */
-    public Item createItem() {
-        return new Item();
-    }
-
-    /**
-     * Create an instance of {@link Money }
-     * 
-     */
-    public Money createMoney() {
-        return new Money();
+    public Bid createBid() {
+        return new Bid();
     }
 
     /**
@@ -180,14 +202,6 @@ public class ObjectFactory {
      */
     public Category createCategory() {
         return new Category();
-    }
-
-    /**
-     * Create an instance of {@link Bid }
-     * 
-     */
-    public Bid createBid() {
-        return new Bid();
     }
 
     /**
@@ -205,6 +219,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service/", name = "newBid")
     public JAXBElement<NewBid> createNewBid(NewBid value) {
         return new JAXBElement<NewBid>(_NewBid_QNAME, NewBid.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Item }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service/", name = "item")
+    public JAXBElement<Item> createItem(Item value) {
+        return new JAXBElement<Item>(_Item_QNAME, Item.class, null, value);
     }
 
     /**
@@ -232,6 +255,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service/", name = "offerItem")
     public JAXBElement<OfferItem> createOfferItem(OfferItem value) {
         return new JAXBElement<OfferItem>(_OfferItem_QNAME, OfferItem.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FontysTime }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service/", name = "fontysTime")
+    public JAXBElement<FontysTime> createFontysTime(FontysTime value) {
+        return new JAXBElement<FontysTime>(_FontysTime_QNAME, FontysTime.class, null, value);
     }
 
     /**
@@ -289,6 +321,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Money }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service/", name = "money")
+    public JAXBElement<Money> createMoney(Money value) {
+        return new JAXBElement<Money>(_Money_QNAME, Money.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link OfferPaintingResponse }{@code >}}
      * 
      */
@@ -313,6 +354,33 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service/", name = "offerItemResponse")
     public JAXBElement<OfferItemResponse> createOfferItemResponse(OfferItemResponse value) {
         return new JAXBElement<OfferItemResponse>(_OfferItemResponse_QNAME, OfferItemResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link User }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service/", name = "user")
+    public JAXBElement<User> createUser(User value) {
+        return new JAXBElement<User>(_User_QNAME, User.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Bid }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service/", name = "bid")
+    public JAXBElement<Bid> createBid(Bid value) {
+        return new JAXBElement<Bid>(_Bid_QNAME, Bid.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Category }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service/", name = "category")
+    public JAXBElement<Category> createCategory(Category value) {
+        return new JAXBElement<Category>(_Category_QNAME, Category.class, null, value);
     }
 
     /**

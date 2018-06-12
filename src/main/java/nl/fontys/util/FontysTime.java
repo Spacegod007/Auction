@@ -2,10 +2,15 @@ package nl.fontys.util;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.TimeZone;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FontysTime implements Serializable{
 	private long seconds;
 

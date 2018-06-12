@@ -29,16 +29,52 @@ public interface AuctionService {
      * 
      * @param arg0
      * @return
-     *     returns java.util.List<service.Item>
+     *     returns service.Item
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findItemByDescription", targetNamespace = "http://service/", className = "service.FindItemByDescription")
-    @ResponseWrapper(localName = "findItemByDescriptionResponse", targetNamespace = "http://service/", className = "service.FindItemByDescriptionResponse")
-    @Action(input = "http://service/AuctionService/findItemByDescriptionRequest", output = "http://service/AuctionService/findItemByDescriptionResponse")
-    public List<Item> findItemByDescription(
+    @RequestWrapper(localName = "getItem", targetNamespace = "http://service/", className = "service.GetItem")
+    @ResponseWrapper(localName = "getItemResponse", targetNamespace = "http://service/", className = "service.GetItemResponse")
+    @Action(input = "http://service/AuctionService/getItemRequest", output = "http://service/AuctionService/getItemResponse")
+    public Item getItem(
         @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
+        Long arg0);
+
+    /**
+     * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns service.Bid
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "newBid", targetNamespace = "http://service/", className = "service.NewBid")
+    @ResponseWrapper(localName = "newBidResponse", targetNamespace = "http://service/", className = "service.NewBidResponse")
+    @Action(input = "http://service/AuctionService/newBidRequest", output = "http://service/AuctionService/newBidResponse")
+    public Bid newBid(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Item arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        User arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        Money arg2);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "revokeItem", targetNamespace = "http://service/", className = "service.RevokeItem")
+    @ResponseWrapper(localName = "revokeItemResponse", targetNamespace = "http://service/", className = "service.RevokeItemResponse")
+    @Action(input = "http://service/AuctionService/revokeItemRequest", output = "http://service/AuctionService/revokeItemResponse")
+    public boolean revokeItem(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Item arg0);
 
     /**
      * 
@@ -69,6 +105,27 @@ public interface AuctionService {
 
     /**
      * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns service.Item
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "offerItem", targetNamespace = "http://service/", className = "service.OfferItem")
+    @ResponseWrapper(localName = "offerItemResponse", targetNamespace = "http://service/", className = "service.OfferItemResponse")
+    @Action(input = "http://service/AuctionService/offerItemRequest", output = "http://service/AuctionService/offerItemResponse")
+    public Item offerItem(
+        @WebParam(name = "arg0", targetNamespace = "")
+        User arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Category arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2);
+
+    /**
+     * 
      * @param arg3
      * @param arg2
      * @param arg1
@@ -93,74 +150,17 @@ public interface AuctionService {
 
     /**
      * 
-     * @param arg2
-     * @param arg1
      * @param arg0
      * @return
-     *     returns service.Item
+     *     returns java.util.List<service.Item>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "offerItem", targetNamespace = "http://service/", className = "service.OfferItem")
-    @ResponseWrapper(localName = "offerItemResponse", targetNamespace = "http://service/", className = "service.OfferItemResponse")
-    @Action(input = "http://service/AuctionService/offerItemRequest", output = "http://service/AuctionService/offerItemResponse")
-    public Item offerItem(
+    @RequestWrapper(localName = "findItemByDescription", targetNamespace = "http://service/", className = "service.FindItemByDescription")
+    @ResponseWrapper(localName = "findItemByDescriptionResponse", targetNamespace = "http://service/", className = "service.FindItemByDescriptionResponse")
+    @Action(input = "http://service/AuctionService/findItemByDescriptionRequest", output = "http://service/AuctionService/findItemByDescriptionResponse")
+    public List<Item> findItemByDescription(
         @WebParam(name = "arg0", targetNamespace = "")
-        User arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Category arg1,
-        @WebParam(name = "arg2", targetNamespace = "")
-        String arg2);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "revokeItem", targetNamespace = "http://service/", className = "service.RevokeItem")
-    @ResponseWrapper(localName = "revokeItemResponse", targetNamespace = "http://service/", className = "service.RevokeItemResponse")
-    @Action(input = "http://service/AuctionService/revokeItemRequest", output = "http://service/AuctionService/revokeItemResponse")
-    public boolean revokeItem(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Item arg0);
-
-    /**
-     * 
-     * @param arg2
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns service.Bid
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "newBid", targetNamespace = "http://service/", className = "service.NewBid")
-    @ResponseWrapper(localName = "newBidResponse", targetNamespace = "http://service/", className = "service.NewBidResponse")
-    @Action(input = "http://service/AuctionService/newBidRequest", output = "http://service/AuctionService/newBidResponse")
-    public Bid newBid(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Item arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        User arg1,
-        @WebParam(name = "arg2", targetNamespace = "")
-        Money arg2);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns service.Item
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getItem", targetNamespace = "http://service/", className = "service.GetItem")
-    @ResponseWrapper(localName = "getItemResponse", targetNamespace = "http://service/", className = "service.GetItemResponse")
-    @Action(input = "http://service/AuctionService/getItemRequest", output = "http://service/AuctionService/getItemResponse")
-    public Item getItem(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Long arg0);
+        String arg0);
 
 }

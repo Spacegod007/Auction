@@ -3,8 +3,13 @@ package auction.domain;
 import nl.fontys.util.Money;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
         @NamedQuery(name = "Item.count", query = "SELECT COUNT(i) FROM Item AS i"),
         @NamedQuery(name = "Item.find", query = "SELECT i FROM Item AS i WHERE i.id = :id"),
