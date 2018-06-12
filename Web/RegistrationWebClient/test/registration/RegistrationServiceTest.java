@@ -35,6 +35,4 @@ public class RegistrationServiceTest
         User user = service.getUser(MAIL_ADDRESS_2);
         assertEquals(MAIL_ADDRESS_2, user.getEmail(), "returned mail address is not equal to the send mail address");
     }
-
-
 }

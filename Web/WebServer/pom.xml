@@ -10,16 +10,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>6.2.1.jre8</version>
-        </dependency>
-        <dependency>
-            <groupId>nl.fhict.se42</groupId>
-            <artifactId>auction</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>nl.fhict.se42</groupId>
             <artifactId>auction</artifactId>
             <version>1.0-SNAPSHOT</version>

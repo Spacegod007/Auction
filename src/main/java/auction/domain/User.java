@@ -36,7 +36,7 @@ public class User {
 
 
     @OneToMany(mappedBy = "seller")
-    private Set<Item> offeredItems = new HashSet<>();
+    private Set<Item> offeredItems = new HashSet<Item>();
 
     public Iterator getOfferedItems() {
         return offeredItems.iterator();

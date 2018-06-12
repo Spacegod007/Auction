@@ -80,7 +80,7 @@ public class ItemDAOJPAImpl extends DAOJPAImpl<Item> implements ItemDAO
     @Override
     public List<Item> findAll()
     {
-        List<Item> returnable = new ArrayList<>();
+        List<Item> returnable = new ArrayList<Item>();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -113,7 +113,7 @@ public class ItemDAOJPAImpl extends DAOJPAImpl<Item> implements ItemDAO
     @Override
     public List<Item> findByDescription(String description)
     {
-        List<Item> returnable = new ArrayList<>();
+        List<Item> returnable = new ArrayList<Item>();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 

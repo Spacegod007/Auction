@@ -1,5 +1,6 @@
 package auction.dao;
 
+import auction.domain.Item;
 import auction.domain.User;
 
 import javax.persistence.EntityManager;
@@ -49,7 +50,7 @@ public class UserDAOJPAImpl extends DAOJPAImpl<User> implements UserDAO
     @Override
     public List<User> findAll()
     {
-        List<User> result = new ArrayList<>();
+        List<User> result = new ArrayList<User>();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
