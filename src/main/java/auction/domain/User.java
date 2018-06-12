@@ -34,22 +34,6 @@ public class User {
         return email;
     }
 
-
-    @OneToMany(mappedBy = "seller")
-    private Set<Item> offeredItems = new HashSet<Item>();
-
-    public Iterator getOfferedItems() {
-        return offeredItems.iterator();
-    }
-
-    void addItem(Item item) {
-        offeredItems.add(item);
-    }
-
-    public int numberOfOfferedItem() {
-        return offeredItems.size();
-    }
-
     @Override
     public boolean equals(Object o)
     {
@@ -58,8 +42,7 @@ public class User {
 
         User user = (User) o;
 
-        if (!email.equals(user.email)) return false;
-        return offeredItems.size() == user.offeredItems.size();
+        return email.equals(user.email);
     }
 
     @Override

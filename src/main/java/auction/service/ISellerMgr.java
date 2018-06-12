@@ -22,6 +22,6 @@ public interface ISellerMgr
      */
     boolean revokeItem(Item item);
 
-    Item offerFurniture(User user, Category category, String description, String material);
-    Item offerPainting(User user, Category category, String description, String title, String painter);
+//    Item offerFurniture(User user, Category category, String description, String material);
+//    Item offerPainting(User user, Category category, String description, String title, String painter);
 }

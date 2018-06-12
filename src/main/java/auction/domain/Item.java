@@ -27,11 +27,11 @@ public class Item implements Comparable<Item> {
     @ManyToOne(cascade = CascadeType.DETACH)
     private User seller;
 
-    @Embedded
-    @AttributeOverrides(@AttributeOverride(name="description", column = @Column(name = "columnDescription")))
+//    @Embedded
+//    @AttributeOverrides(@AttributeOverride(name="description", column = @Column(name = "columnDescription")))
     private Category category;
 
-    @OneToOne(mappedBy = "item", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.MERGE})
     private Bid highest;
 
     private String description;
@@ -42,8 +42,6 @@ public class Item implements Comparable<Item> {
         this.seller = seller;
         this.category = category;
         this.description = description;
-
-        seller.addItem(this);
     }
 
     public Long getId() {
@@ -70,7 +68,7 @@ public class Item implements Comparable<Item> {
         if (highest != null && highest.getAmount().compareTo(amount) >= 0) {
             return null;
         }
-        highest = new Bid(buyer, amount, this);
+        highest = new Bid(buyer, amount);
         return highest;
     }
 

@@ -4,10 +4,7 @@ import auction.domain.Bid;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
-import auction.service.AuctionMgr;
-import auction.service.IAuctionMgr;
-import auction.service.ISellerMgr;
-import auction.service.SellerMgr;
+import auction.service.*;
 import nl.fontys.util.Money;
 
 import javax.jws.WebMethod;
@@ -56,15 +53,19 @@ public class AuctionService implements IAuctionService
         return sellerMgr.revokeItem(item);
     }
 
-    @WebMethod
-    public Item offerFurniture(User user, Category category, String description, String material)
-    {
-        return sellerMgr.offerFurniture(user, category, description, material);
+    public Category createCategory(String description) {
+        return new Category(description);
     }
 
-    @WebMethod
-    public Item offerPainting(User user, Category category, String description, String title, String painter)
-    {
-        return sellerMgr.offerPainting(user, category, description, title, painter);
-    }
+//    @WebMethod
+//    public Item offerFurniture(User user, Category category, String description, String material)
+//    {
+//        return sellerMgr.offerFurniture(user, category, description, material);
+//    }
+//
+//    @WebMethod
+//    public Item offerPainting(User user, Category category, String description, String title, String painter)
+//    {
+//        return sellerMgr.offerPainting(user, category, description, title, painter);
+//    }
 }

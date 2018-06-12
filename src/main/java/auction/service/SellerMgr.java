@@ -16,8 +16,7 @@ public class SellerMgr implements ISellerMgr {
         itemDAO = new ItemDAOJPAImpl();
         userDAO = new UserDAOJPAImpl();
     }
-
-    @Override
+@Override
     public Item offerItem(User seller, Category cat, String description) {
         return offerItem(new Item(seller, cat, description));
     }
@@ -28,8 +27,7 @@ public class SellerMgr implements ISellerMgr {
         userDAO.edit(item.getSeller());
         return item;
     }
-    
-    @Override
+@Override
     public boolean revokeItem(Item item) {
         if (item.getHighestBid() == null)
         {
@@ -37,17 +35,5 @@ public class SellerMgr implements ISellerMgr {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public Item offerFurniture(User user, Category category, String description, String material)
-    {
-        return offerItem(new Furniture(user, category, description, material));
-    }
-
-    @Override
-    public Item offerPainting(User user, Category category, String description, String title, String painter)
-    {
-        return offerItem(new Painting(user, category, description, title, painter));
     }
 }
