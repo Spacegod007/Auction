@@ -1,6 +1,5 @@
 package auction.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -16,8 +15,14 @@ public class Category {
         this.description = description;
     }
 
-    public String getDiscription() {
+    public String getDescription()
+    {
         return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     @Override
