@@ -7,7 +7,7 @@ import auction.domain.User;
 import auction.dao.UserDAOCollectionImpl;
 import auction.dao.UserDAO;
 
-public class RegistrationMgr {
+public class RegistrationMgr implements IRegistrationMgr {
 
     private UserDAO userDAO;
 
