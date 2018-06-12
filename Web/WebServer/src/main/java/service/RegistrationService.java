@@ -15,7 +15,7 @@ public class RegistrationService implements IRegistrationService
     {
         registrationMgr = new RegistrationMgr();
     }
-
+    
     @WebMethod
     @Override
     public User registerUser(String email)

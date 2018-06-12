@@ -4,7 +4,10 @@ import auction.domain.Bid;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
-import auction.service.*;
+import auction.service.AuctionMgr;
+import auction.service.IAuctionMgr;
+import auction.service.ISellerMgr;
+import auction.service.SellerMgr;
 import nl.fontys.util.Money;
 
 import javax.jws.WebMethod;
