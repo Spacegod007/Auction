@@ -15,7 +15,7 @@ public interface UserDAO {
      * The user is persisted. If a user with the same email allready exists an EntityExistsException is thrown
      * @param user
      */
-    void create(User user);
+    User create(User user);
 
     /**
      * Merge the state of the given user into persistant context. If the user did not exist an IllegalArgumentException is thrown

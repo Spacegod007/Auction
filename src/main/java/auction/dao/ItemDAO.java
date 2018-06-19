@@ -15,7 +15,7 @@ public interface ItemDAO {
      * The item is persisted. If a item with the same id allready exists an EntityExistsException is thrown
      * @param item
      */
-    void create(Item item);
+    Item create(Item item);
 
     /**
      * Merge the state of the given item into persistant context. If the item did not exist an IllegalArgumentException is thrown

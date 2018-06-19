@@ -16,7 +16,7 @@ abstract class DAOJPAImpl<DBO> implements DAO<DBO>
     static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("auction");
 
     @Override
-    public void create(DBO dataBaseObject)
+    public DBO create(DBO dataBaseObject)
     {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -34,11 +34,13 @@ abstract class DAOJPAImpl<DBO> implements DAO<DBO>
         {
             entityManager.close();
         }
+        return dataBaseObject;
     }
 
     private void create(EntityManager entityManager, DBO dataBaseObject) throws Exception
     {
         entityManager.persist(dataBaseObject);
+        entityManager.refresh(dataBaseObject);
     }
 
     @Override
