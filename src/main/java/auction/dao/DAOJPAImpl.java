@@ -41,7 +41,6 @@ abstract class DAOJPAImpl<DBO> implements DAO<DBO>
     private void create(EntityManager entityManager, DBO dataBaseObject) throws Exception
     {
         entityManager.persist(dataBaseObject);
-  //      entityManager.refresh(dataBaseObject);
     }
 
     @Override

@@ -10,7 +10,6 @@ import static org.junit.Assert.assertTrue;
 
 public class ClientRegistrationMgrTest
 {
-    private static final AuctionService auctionService = new AuctionServiceService().getPort(AuctionService.class);
     private static final RegistrationService registrationService = new RegistrationServiceService().getPort(RegistrationService.class);
 
 

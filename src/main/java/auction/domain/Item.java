@@ -27,8 +27,8 @@ public class Item implements Comparable<Item> {
     @ManyToOne(cascade = CascadeType.DETACH)
     private User seller;
 
-//    @Embedded
-//    @AttributeOverrides(@AttributeOverride(name="description", column = @Column(name = "columnDescription")))
+    @Embedded
+    @AttributeOverrides(@AttributeOverride(name="description", column = @Column(name = "columnDescription")))
     private Category category;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.MERGE})
