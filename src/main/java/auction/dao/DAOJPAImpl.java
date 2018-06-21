@@ -94,4 +94,30 @@ abstract class DAOJPAImpl<DBO> implements DAO<DBO>
     {
         entityManager.remove(entityManager.merge(dataBaseObject));
     }
+
+    @Override
+    public void refresh(DBO dataBaseObject)
+    {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        try
+        {
+            refresh(entityManager, dataBaseObject);
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            LOGGER.log(Level.SEVERE, ERROR_MESSAGE, e);
+        }
+        finally
+        {
+            entityManager.close();
+        }
+    }
+
+    private void refresh(EntityManager entityManager, DBO dataBaseObject)
+    {
+        entityManager.refresh(dataBaseObject);
+    }
 }

@@ -21,7 +21,7 @@ public class ClientRegistrationMgrTest
         User user2 = registrationService.registerUser("xxx2@yyy2");
         assertTrue(user2.getEmail().equals("xxx2@yyy2"));
         User user2bis = registrationService.registerUser("xxx2@yyy2");
-        assertEquals(user2bis, user2);
+        assertEquals(user2bis.getEmail(), user2.getEmail());
         //geen @ in het adres
         assertNull(registrationService.registerUser("abc"));
     }
@@ -31,7 +31,7 @@ public class ClientRegistrationMgrTest
     {
         User user1 = registrationService.registerUser("xxx5@yyy5");
         User userGet = registrationService.getUser("xxx5@yyy5");
-        assertEquals(userGet, user1);
+        assertEquals(userGet.getEmail(), user1.getEmail());
         assertNull(registrationService.getUser("aaa4@bb5"));
         registrationService.registerUser("abc");
         assertNull(registrationService.getUser("abc"));

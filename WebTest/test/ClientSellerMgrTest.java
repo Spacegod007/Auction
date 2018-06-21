@@ -1,4 +1,5 @@
 
+import org.junit.Ignore;
 import org.junit.Test;
 import service.*;
 
@@ -28,7 +29,7 @@ public class ClientSellerMgrTest
      */
     @Test
     public void testRevokeItem() {
-        String omsch = "omsch";
+        String omsch = "omschj";
         String omsch2 = "omsch2";
 
 
@@ -51,6 +52,7 @@ public class ClientSellerMgrTest
         money.setCents(100);
 
         auctionService.newBid(item2, buyer,money);
+        item2 = auctionService.getItem(item2.getId());
         boolean res2 = auctionService.revokeItem(item2);
         assertFalse(res2);
         int count2 = auctionService.findItemByDescription(omsch2).size();

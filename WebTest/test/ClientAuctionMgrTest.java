@@ -14,7 +14,7 @@ public class ClientAuctionMgrTest
     public void getItem()
     {
         String email = "xx2@nl";
-        String omsch = "omsch";
+        String omsch = "omschr";
 
         User seller1 = registrationService.registerUser(email);
         Category cat = new Category();
