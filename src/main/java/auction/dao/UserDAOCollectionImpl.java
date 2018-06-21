@@ -20,11 +20,11 @@ public class UserDAOCollectionImpl implements UserDAO {
     }
 
     @Override
-    public void create(User user) {
+    public User create(User user) {
          if (findByEmail(user.getEmail()) != null) {
             throw new EntityExistsException();
         }
-        users.put(user.getEmail(), user);
+        return users.put(user.getEmail(), user);
     }
 
     @Override

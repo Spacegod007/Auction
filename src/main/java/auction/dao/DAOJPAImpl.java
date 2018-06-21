@@ -32,6 +32,7 @@ abstract class DAOJPAImpl<DBO> implements DAO<DBO>
         }
         finally
         {
+            entityManager.refresh(dataBaseObject);
             entityManager.close();
         }
         return dataBaseObject;
@@ -40,7 +41,7 @@ abstract class DAOJPAImpl<DBO> implements DAO<DBO>
     private void create(EntityManager entityManager, DBO dataBaseObject) throws Exception
     {
         entityManager.persist(dataBaseObject);
-        entityManager.refresh(dataBaseObject);
+  //      entityManager.refresh(dataBaseObject);
     }
 
     @Override
