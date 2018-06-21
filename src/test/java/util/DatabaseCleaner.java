@@ -15,9 +15,9 @@ public class DatabaseCleaner {
     public static final String PERSISTENCE_NAME_AUCTION = "auction";
 
     private static final Class<?>[] ENTITY_TYPES = {
-            Bid.class,
             Item.class,
-            User.class
+            Bid.class,
+            User.class,
     };
 
     private final EntityManager em;
