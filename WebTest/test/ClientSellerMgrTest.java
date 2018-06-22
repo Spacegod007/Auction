@@ -1,10 +1,7 @@
-
-import org.junit.Ignore;
 import org.junit.Test;
 import service.*;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 public class ClientSellerMgrTest
 {
@@ -51,11 +48,14 @@ public class ClientSellerMgrTest
         money.setCurrency("eur");
         money.setCents(100);
 
-        auctionService.newBid(item2, buyer,money);
+        Bid bid = auctionService.newBid(item2, buyer, money);
         item2 = auctionService.getItem(item2.getId());
         boolean res2 = auctionService.revokeItem(item2);
         assertFalse(res2);
         int count2 = auctionService.findItemByDescription(omsch2).size();
         assertEquals(1, count2);
+
+        assertEquals("Bid is not equal" ,item2.getHighest().getAmount().getCents(), bid.getAmount().getCents());
+
     }
 }
